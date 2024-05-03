@@ -1,0 +1,23 @@
+# 1 enable transfering files via ssh (tarball docker image first)
+scp -i /path/to/pkey /path/to/local/file.txt username@remotehost:/path/to/remote/directory/
+
+# 2 enable passing shell scripts via ssh
+ssh root@MachineB 'bash -s' < local_script.sh
+
+# 3 enable pgxn so we can easily install extensions
+need to figure out if we should enable this only at database setup time or otherwise
+
+# 4 first time setup script (filling env etc) + simple python cli tool to bootstrap the database + start serving
+note: should performance config happen here or elsewhere?
+and maybe we should copy over the pgtune code: https://github.com/le0pard/pgtune/blob/master/src/features/configuration/configurationSlice.js
+
+# 5 dev script for easy cleanup to rapidly test new builds (e.g removing local ./pgdata and stopping/removing container)
+
+# 6 easy way to change defaults in pg_bouncer / postgresconf via ssh + docker exec -it and restarting pgbouncer / postgres
+
+# 7 support for pg_dump / pg_restore from remote db to local db
+
+# 8 support for continous backups 
+
+# 9 various hardening steps
+
