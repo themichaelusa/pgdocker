@@ -1,3 +1,5 @@
+apt-get update
+
 sudo apt install -y postgresql-common
 
 /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh

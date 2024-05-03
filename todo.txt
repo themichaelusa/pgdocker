@@ -16,6 +16,7 @@ and maybe we should copy over the pgtune code: https://github.com/le0pard/pgtune
 # 6 easy way to change defaults in pg_bouncer / postgresconf via ssh + docker exec -it and restarting pgbouncer / postgres
 
 # 7 support for pg_dump / pg_restore from remote db to local db
+note: du -s dump_dir/ | awk '{print $1/1024/1024 " GB"}' for size, so we can pass it back to our local shell
 
 # 8 support for continous backups 
 
