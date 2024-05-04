@@ -22,3 +22,7 @@ note: du -s dump_dir/ | awk '{print $1/1024/1024 " GB"}' for size, so we can pas
 
 # 9 various hardening steps
 
+
+Other misc stuff:
+inlining perf vars in postgresql.conf seems to not be working...
+I needed to do alter system and then restart the container to get the changes working properly
