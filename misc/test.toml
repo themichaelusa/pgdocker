@@ -1,0 +1,61 @@
+
+[postgres.user]
+port = 5432
+user = "postgres"
+password = "mypassword"
+host = "127.0.0.1"
+
+# require pwd on connection, only allow local connections, reject all others
+[postgres.hba]
+rules = [
+    "host all all 127.0.0.1/32 scram-sha-256",
+    "local all all peer",
+    "host all all 0.0.0.0/0 reject"
+]
+
+[postgres.conf]
+hba_file = '/etc/postgresql/pg_hba.conf'
+listen_addresses = '*'
+# from https://pgtune.leopard.in.ua/ 
+max_connections = 200
+shared_buffers = "7424MB"
+effective_cache_size = "22272MB"
+maintenance_work_mem = "1856MB"
+checkpoint_completion_target = 0.9
+wal_buffers = "16MB"
+default_statistics_target = 100
+random_page_cost = 1.1
+effective_io_concurrency = 200
+work_mem = "9502kB"
+huge_pages = "try"
+min_wal_size = "1GB"
+max_wal_size = "4GB"
+max_worker_processes = 8
+max_parallel_workers_per_gather = 4
+max_parallel_workers = 8
+max_parallel_maintenance_workers = 4
+
+[database.extensions]
+pgvector = true
+postgis = true
+hll = true
+
+[pgbouncer.conf]
+databases = [
+    "db = host=localhost port=5432 dbname=db"
+]
+
+listen_port = 6432
+listen_addr = "*"
+auth_type = "scram-sha-256"
+auth_file = "/etc/pgbouncer/userlist.txt"
+logfile = "/var/log/pgbouncer/pgbouncer.log"
+pidfile = "/var/run/pgbouncer/pgbouncer.pid"
+admin_users = "postgres"
+ignore_startup_parameters = "extra_float_digits"
+
+
+[pgbouncer.userlist]
+entries = [
+    { user = "pg_user", password = "pg_password" },
+]

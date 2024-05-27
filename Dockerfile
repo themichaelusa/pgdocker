@@ -3,6 +3,9 @@ FROM postgres:16.2-bookworm
 # Create a directory for the PostgreSQL data
 RUN mkdir -p /var/lib/postgresql/data
 
+# Install PGBouncer
+RUN apt-get update && apt-get install -y pgbouncer
+
 # Install PostGIS dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -12,9 +15,6 @@ RUN apt-get update && \
 
 # Install PGVector
 RUN export DEBIAN_FRONTEND=noninteractive && apt-get update && apt install -y postgresql-16-pgvector
-
-# Install PGBouncer
-RUN apt-get update && apt-get install -y pgbouncer
 
 # Copy custom PostgreSQL configuration files (e.g. postgresql.conf, pg_hba.conf)
 COPY conf/postgresql /etc/postgresql
